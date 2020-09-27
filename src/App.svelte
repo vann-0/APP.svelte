@@ -6,11 +6,11 @@ import { each } from "svelte/internal";
     "";
   let name = "S71211";
   let st='a';
-  // var url = `data/cars?plate=${st}`;
-  let data = {'id_car': 0, "brand": "None", "driver": "None", "tel_number": "None","plate": "c"};
+  $: url = `data/cars?plate=${st}`;
+  $: data = [{'id_car': 0, "brand": "None", "driver": "None", "tel_number": "None","plate": "c"}];
   onMount(async function() {
 	  setInterval(async () => {
-		const response = await fetch(`data/cars?plate=${st}`);
+		const response = await fetch(url);
     const json = await response.json();
     data = json;
 
@@ -67,11 +67,11 @@ import { each } from "svelte/internal";
   }
 
   .led.active {
-    background-color: rgba(65, 77, 245, 0.815);
+    background-color: rgba(18, 238, 18, 0.815);
   }
 
   .btn.active {
-    background-color: rgba(65, 77, 245, 0.815);
+    background-color: rgba(20, 238, 20, 0.815);
   }
 
   body {
@@ -90,8 +90,8 @@ import { each } from "svelte/internal";
 
   </ul>
   <div class="container">
-    <div class="led" class:active={data['driver']==undefined} />
-    <div class="btn" class:active={data['plate']==undefined} />
+    <div class="led" class:active={data[0]['driver']==""} />
+    <div class="btn" class:active={data[0]['plate']==undefined} />
   </div>
   <div class="container" >
     <input bind:value={st}>
