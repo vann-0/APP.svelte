@@ -1,10 +1,8 @@
 <script>
 import { link } from "fs";
-  import { onMount } from "svelte";
+import { onMount } from "svelte";
 import { each } from "svelte/internal";
-  let src =
-    "";
-  let name = "S71211";
+
   let st='a';
   $: url = `data/cars?plate=${st}`;
   $: data = [{'id_car': 0, "brand": "None", "driver": "None", "tel_number": "None","plate": "c"}];
@@ -13,7 +11,6 @@ import { each } from "svelte/internal";
 		const response = await fetch(url);
     const json = await response.json();
     data = json;
-
 	  }, 2000)
   });
   function car_crud(st) {
@@ -81,24 +78,19 @@ import { each } from "svelte/internal";
 
 
 <body>
-  <div class="footer">car booking system</div>
-  <br />
-  <ul>
-    <center>
-      <img {src} alt="{name} demo" />
-    </center>
-
-  </ul>
+  <div class="footer">cbs app</div>
+  <!-- <br /> -->
   <div class="container">
-    <div class="led" class:active={data[0]['driver']==""} />
+    <div class="led" class:active={data[0]['driver']==undefined} />
     <div class="btn" class:active={data[0]['plate']==undefined} />
   </div>
   <div class="container" >
     <input bind:value={st}>
     <button	on:click={car_crud(st)}>search</button>
+  </div>
+  <div class="container" >
     <p id='k'></p>
   </div>
-
 </body>
 
 
